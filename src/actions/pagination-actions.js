@@ -1,11 +1,4 @@
-import { PAGINATION_SET_PARAMS, PAGINATION_REGISTER } from "./constants";
-
-export const registerPagination = paginationName => ({
-  type: PAGINATION_REGISTER,
-  payload: {
-    paginationName
-  }
-});
+import { PAGINATION_SET_PARAMS } from "./constants";
 
 export const setParams = payload => ({
   type: PAGINATION_SET_PARAMS,

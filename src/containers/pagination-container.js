@@ -7,28 +7,29 @@ class PaginationContainer extends Component {
   // -----------------Methods-------------------
 
   parseURLParamsAndAddPage = () => {
-    const { location } = this.props;
+    const { location, paramName = "page", withparams } = this.props;
     const params = queryString.parse(location.search);
 
-    return { ...params, page: params.page || 1 };
+    if (withparams) return { ...params, [paramName]: params[paramName] || 1 };
+    return { [paramName]: params[paramName] || 1 };
   };
 
   // ----------------Lifecycle------------------
 
   componentDidMount = () => {
-    const { pagName = "page", setParams } = this.props;
+    const { pagName, setParams } = this.props;
     const newParams = this.parseURLParamsAndAddPage();
-    setParams({ pagName, newParams });
+    setParams({ paginationName: pagName, params: newParams });
   };
 
   componentDidUpdate = prevProps => {
-    const { location, pagName = "page", setParams } = this.props;
+    const { location, pagName, setParams } = this.props;
 
     const paramsHasChanged = prevProps.location.search !== location.search;
     if (!paramsHasChanged) return null;
 
     const newParams = this.parseURLParamsAndAddPage();
-    setParams({ pagName, newParams });
+    setParams({ paginationName: pagName, params: newParams });
   };
 
   render = () => this.props.children;
