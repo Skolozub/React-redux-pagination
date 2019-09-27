@@ -10,7 +10,7 @@ import { App } from "./app";
 
 const GlobalStyles = createGlobalStyle`
   html, body {
-    font-family: "Lucida Console", Monaco, monospace;
+    font-family: 'Source Sans Pro', 'Lucida Grande', sans-serif;
     line-height: 1;
   }
 `;

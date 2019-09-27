@@ -7,9 +7,7 @@ class PaginationContainer extends Component {
   // -----------------Methods-------------------
 
   parseURLParamsAndAddPage = () => {
-    const { location, pagination, paginationName } = this.props;
-    const { options } = pagination[paginationName];
-    const { paramName, withparams } = options;
+    const { location, paramName, withparams } = this.props;
 
     const params = queryString.parse(location.search);
 
@@ -44,8 +42,7 @@ class PaginationContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  location: state.router.location,
-  pagination: state.pagination
+  location: state.router.location
 });
 
 const mapDispatchToProps = dispatch => ({

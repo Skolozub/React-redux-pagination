@@ -1,4 +1,6 @@
-import { setParams } from "../actions/pagination-actions";
+import React from "react";
+import { PaginationContainer } from "./";
+import { registerPag } from "../actions/pagination-actions";
 
 export const registerPagination = ({
   store,
@@ -7,10 +9,15 @@ export const registerPagination = ({
   withparams = false
 }) => {
   store.dispatch(
-    setParams({
+    registerPag({
       paginationName,
-      params: {},
       options: { paramName, withparams }
     })
+  );
+
+  return props => (
+    <PaginationContainer
+      {...{ ...props, paginationName, paramName, withparams }}
+    />
   );
 };

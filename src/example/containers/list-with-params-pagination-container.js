@@ -1,11 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import { store } from "../../constants/store";
-import { registerPagination, PaginationContainer } from "../../containers";
+import { registerPagination } from "../../containers";
 import ListPaginationContainer from "./list-pagination-container";
 import ListContainer from "./list-container";
 
-registerPagination({
+const RegisteredPaginationContainer = registerPagination({
   store,
   paginationName: "withparams",
   paramName: "stage",
@@ -13,10 +13,10 @@ registerPagination({
 });
 
 const ListWithParamsPaginationContainer = ({ params }) => (
-  <PaginationContainer paginationName="withparams">
+  <RegisteredPaginationContainer>
     <ListPaginationContainer params={params} paramName="stage" />
     <ListContainer params={params} />
-  </PaginationContainer>
+  </RegisteredPaginationContainer>
 );
 
 const mapStateToProps = state => ({
