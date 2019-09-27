@@ -1,13 +1,16 @@
-import { Component } from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import queryString from "query-string";
-import { setParams } from "../actions/pagination-actions";
+import { setParams, deleteParams } from "../actions/pagination-actions";
 
 class PaginationContainer extends Component {
   // -----------------Methods-------------------
 
   parseURLParamsAndAddPage = () => {
-    const { location, paramName = "page", withparams } = this.props;
+    const { location, pagination, paginationName } = this.props;
+    const { options } = pagination[paginationName];
+    const { paramName, withparams } = options;
+
     const params = queryString.parse(location.search);
 
     if (withparams) return { ...params, [paramName]: params[paramName] || 1 };
@@ -17,30 +20,37 @@ class PaginationContainer extends Component {
   // ----------------Lifecycle------------------
 
   componentDidMount = () => {
-    const { pagName, setParams } = this.props;
+    const { paginationName, setParamsHandler } = this.props;
     const newParams = this.parseURLParamsAndAddPage();
-    setParams({ paginationName: pagName, params: newParams });
+    setParamsHandler({ paginationName: paginationName, params: newParams });
   };
 
   componentDidUpdate = prevProps => {
-    const { location, pagName, setParams } = this.props;
+    const { location, paginationName, setParamsHandler } = this.props;
 
     const paramsHasChanged = prevProps.location.search !== location.search;
     if (!paramsHasChanged) return null;
 
     const newParams = this.parseURLParamsAndAddPage();
-    setParams({ paginationName: pagName, params: newParams });
+    setParamsHandler({ paginationName, params: newParams });
   };
 
-  render = () => this.props.children;
+  componentWillUnmount = () => {
+    const { paginationName, deleteParamsHandler, saveParams } = this.props;
+    if (!saveParams) deleteParamsHandler({ paginationName });
+  };
+
+  render = () => <>{this.props.children}</>;
 }
 
 const mapStateToProps = state => ({
-  location: state.router.location
+  location: state.router.location,
+  pagination: state.pagination
 });
 
 const mapDispatchToProps = dispatch => ({
-  setParams: payload => dispatch(setParams(payload))
+  setParamsHandler: payload => dispatch(setParams(payload)),
+  deleteParamsHandler: payload => dispatch(deleteParams(payload))
 });
 
 export default connect(

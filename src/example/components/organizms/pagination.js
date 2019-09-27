@@ -4,17 +4,12 @@ import queryString from "query-string";
 import styled from "styled-components";
 
 export const Pagination = props => {
-  const {
-    count,
-    location: { pathname },
-    pagination,
-    pagName,
-    paramName = "page"
-  } = props;
+  const { count } = props;
+  if (count <= 1) return null;
 
-  if (count <= 1 || !pagination[pagName]) return null;
+  const { location, params, paramName = "page" } = props;
+  const { pathname } = location;
 
-  const { params } = pagination[pagName];
   const currentPage = Number(params[paramName]);
 
   return (

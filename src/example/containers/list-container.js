@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { connect } from "react-redux";
 import { List } from "../components/organizms/list";
 
 class ListContainer extends Component {
@@ -16,11 +15,16 @@ class ListContainer extends Component {
 
   // ----------------Lifecycle------------------
 
-  componentDidUpdate = prevProps => {
-    const { pagination, pagName } = this.props;
+  componentDidUpdate = () => {
+    const { params } = this.props;
 
-    if (prevProps.pagination[pagName] !== pagination[pagName])
-      this.loadData(pagination[pagName].params);
+    this.loadData(params);
+  };
+
+  componentDidUpdate = prevProps => {
+    const { params } = this.props;
+
+    if (prevProps.params !== params) this.loadData(params);
   };
 
   state = {
@@ -33,9 +37,4 @@ class ListContainer extends Component {
   );
 }
 
-const mapStateToProps = state => ({
-  pagination: state.pagination,
-  state
-});
-
-export default connect(mapStateToProps)(ListContainer);
+export default ListContainer;
