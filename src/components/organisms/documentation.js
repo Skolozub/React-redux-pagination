@@ -1,7 +1,8 @@
 import React from "react";
-import { Lib } from "../atoms/lib";
+import { Link } from "react-router-dom";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { Lib } from "../atoms/lib";
 
 export const Documentation = () => (
   <Lib.PageWrapper>
@@ -50,11 +51,17 @@ export const Documentation = () => (
       </Lib.Li>
     </Lib.Ul>
     <Lib.H2>Примеры</Lib.H2>
-    <Lib.P>Пагинация с параметрами</Lib.P>
+    <Lib.P>
+      <Link to="/params/?some-param=505">Пагинация с параметрами</Link>
+    </Lib.P>
     <SyntaxHighlighter language="javascript" style={tomorrow} showLineNumbers>
       {paginstionWithPropsCode}
     </SyntaxHighlighter>
-    <Lib.P>Пагинация без параметров</Lib.P>
+    <Lib.P>
+      <Link to="/only-page-param/?some-param=505">
+        Пагинация без параметров
+      </Link>
+    </Lib.P>
     <SyntaxHighlighter language="javascript" style={tomorrow} showLineNumbers>
       {paginstionWithoutPropsCode}
     </SyntaxHighlighter>
