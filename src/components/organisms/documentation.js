@@ -33,7 +33,7 @@ export const Documentation = () => (
       <Lib.Li>
         <Lib.Mark>paginationName [string: required]</Lib.Mark> - id пагинации,
         которое будет внесено в store.pagination{" "}
-        <Lib.Mark>{` store: { pagination: { [paginationName]: { data } }}`}</Lib.Mark>
+        <Lib.Mark>{`store: { pagination: { [paginationName]: { data } }}`}</Lib.Mark>
       </Lib.Li>
       <Lib.Li>
         <Lib.Mark>withparams [boolean: optional, default = false]</Lib.Mark> -

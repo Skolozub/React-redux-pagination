@@ -52,7 +52,7 @@ export const Pagination = props => {
 
 const Wrapper = styled.div`
   display: flex;
-  margin: 20px 0;
+  margin: 20px;
 `;
 const Btn = styled(Link)`
   display: flex;
