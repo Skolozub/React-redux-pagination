@@ -13,7 +13,7 @@ export const paginationReducer = (state = initialState, { type, payload }) => {
         ...state,
         [payload.paginationName]: {
           params: {},
-          options: payload.options
+          options: { ...payload.options }
         }
       };
     }
@@ -23,7 +23,7 @@ export const paginationReducer = (state = initialState, { type, payload }) => {
         ...state,
         [payload.paginationName]: {
           ...state[payload.paginationName],
-          params: payload.params
+          params: { ...payload.params }
         }
       };
     }
